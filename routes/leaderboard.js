@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const leaderboardController = require('../controllers/leaderboardController');
+const leaderboardController = require('../controllers/LeaderboardController');
 
 // GET: Global leaderboard
 router.get('/global', leaderboardController.getGlobalLeaderboard);
