@@ -30,7 +30,7 @@ async function getUserProfile(req, res) {
 
 async function updateUserProfile(req, res) {
     try {
-      const { fullName, email, city, age, gender } = req.body;
+      const { fullName, email, city, age, gender,totalPoints } = req.body;
   
       const user = await User.findById(req.user.id);
       if (!user) {
@@ -43,6 +43,7 @@ async function updateUserProfile(req, res) {
       user.city = city || user.city;
       user.age = age || user.age;
       user.gender = gender || user.gender;
+      user.totalPoints = totalPoints || user.totalPoints;
   
       await user.save();
   
