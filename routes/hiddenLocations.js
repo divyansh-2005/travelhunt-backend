@@ -3,15 +3,17 @@ const router = express.Router();
 const HiddenLocation = require('../models/HiddenLocation');
 const adminAuth = require('../middleware/adminAuth');
 
-// POST: Create a new hidden location (only accessible by admin)
+// POST: Create a new hidden location (admin only)
 router.post('/', adminAuth, async (req, res) => {
   try {
-    const { locationName, coordinates, description, culturalSignificance, challenges, quizzes } = req.body;
+    const { locationName, latitude, longitude, description, imageUrl, culturalSignificance, challenges, quizzes } = req.body;
 
     const newLocation = new HiddenLocation({
       locationName,
-      coordinates,
+      latitude,
+      longitude,
       description,
+      imageUrl,
       culturalSignificance,
       challenges,
       quizzes
@@ -25,8 +27,7 @@ router.post('/', adminAuth, async (req, res) => {
   }
 });
 
-
-// GET: Fetch hidden locations by city (or other filters)
+// GET: Fetch hidden locations by city (using locationName as city)
 router.get('/:city', async (req, res) => {
   try {
     const city = req.params.city;
@@ -43,7 +44,7 @@ router.get('/:city', async (req, res) => {
   }
 });
 
-// GET: Fetch All hidden locations
+// GET: Fetch all hidden locations
 router.get('/', async (req, res) => {
   try {
     const locations = await HiddenLocation.find({});

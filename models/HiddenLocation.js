@@ -5,30 +5,32 @@ const hiddenLocationSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  coordinates: {
-    lat: {
-      type: Number,
-      required: true,
-    },
-    lng: {
-      type: Number,
-      required: true,
-    },
+  latitude: {
+    type: Number,
+    required: true,
+  },
+  longitude: {
+    type: Number,
+    required: true,
   },
   description: {
     type: String,
     required: true,
   },
+  imageUrl: {
+    type: String,
+    required: true,  // Each location should have an image URL
+  },
   culturalSignificance: {
     type: String,
-    required: true,
+    default: null,
   },
   challenges: [
     {
       challengeId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Challenge',
-        default: null,  // Set default to null
+        default: null,
       },
       description: String,
       points: {
@@ -42,7 +44,7 @@ const hiddenLocationSchema = new mongoose.Schema({
       quizId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Quiz',
-        default: null,  // Set default to null
+        default: null,
       },
       description: String,
       points: {
